@@ -8,6 +8,8 @@ services:
             context: .
             dockerfile: Dockerfile
         working_dir: /var/www/
+        extra_hosts:
+            - host.docker.internal:host-gateway
         volumes:
             - ./:/var/www
         depends_on:
