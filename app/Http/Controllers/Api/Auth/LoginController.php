@@ -13,7 +13,7 @@ class LoginController extends Controller
     {    
         if (Auth::attempt($loginRequest->only(['email', 'password']))) {
             $user = Auth::user();
-            $token = $user->createToken('teste')->plainTextToken;
+            $token = $user->createToken($user->email)->plainTextToken;
 
             return response()->json([
                 'access_token' => $token,
