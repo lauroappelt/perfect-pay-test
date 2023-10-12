@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('customers', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+        Schema::create('costomers', function (Blueprint $table) {
+            $table->uuid('id')->primary()->default(\DB::raw('gen_random_uuid()'));;
             $table->string('name');
             $table->string('email')->unique();
             $table->string('cpf')->unique();
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('customers');
+        Schema::dropIfExists('costomers');
     }
 };
