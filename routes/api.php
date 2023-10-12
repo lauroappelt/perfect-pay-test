@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Costomer\CreateCostomerController;
+use App\Http\Controllers\Api\Costomer\UpdateCostomerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,7 @@ Route::post('login', LoginController::class)->name('api.login');
 
 Route::middleware('auth:sanctum')->group(function(){
     Route::prefix('costomer')->group(function () {
-        Route::post('', CreateCostomerController::class)->name('api.create.costomer');
+        Route::post('', CreateCostomerController::class)->name('api.costomer');
+        Route::put('', UpdateCostomerController::class)->name('api.costomer');
     });
 });

@@ -27,7 +27,7 @@ class CreateCostomerTest extends TestCase
     public function test_create_costomer(): void
     {
         $response = $this->actingAs($this->user)
-            ->post(route('api.create.costomer'), $this->payload, [
+            ->post(route('api.costomer'), $this->payload, [
                 'Accept' => 'application/json',
             ]);
 
@@ -49,24 +49,24 @@ class CreateCostomerTest extends TestCase
     public function test_cannot_create_same_fields(): void
     {
         $response = $this->actingAs($this->user)
-            ->post(route('api.create.costomer'), $this->payload, [
+            ->post(route('api.costomer'), $this->payload, [
                 'Accept' => 'application/json',
             ]);
 
         $response->assertCreated();
 
         $response = $this->actingAs($this->user)
-            ->post(route('api.create.costomer'), $this->payload, [
+            ->post(route('api.costomer'), $this->payload, [
                 'Accept' => 'application/json',
             ]);
 
-        $response->assertBadRequest();
+        $response->assertUnprocessable();
     }
 
     public function test_cannot_create_costomer_without_required_fields(): void
     {
         $response = $this->actingAs($this->user)
-            ->post(route('api.create.costomer'), [], [
+            ->post(route('api.costomer'), [], [
                 'Accept' => 'application/json',
             ]);
 
@@ -79,7 +79,7 @@ class CreateCostomerTest extends TestCase
         $payload['email'] = 'invalidmail';
 
         $response = $this->actingAs($this->user)
-            ->post(route('api.create.costomer'), $payload, [
+            ->post(route('api.costomer'), $payload, [
                 'Accept' => 'application/json'
         ]);
 
@@ -92,7 +92,7 @@ class CreateCostomerTest extends TestCase
         $payload['cpf'] = '111.111.111-11';
 
         $response = $this->actingAs($this->user)
-            ->post(route('api.create.costomer'), $payload, [
+            ->post(route('api.costomer'), $payload, [
                 'Accept' => 'application/json'
         ]);
 
