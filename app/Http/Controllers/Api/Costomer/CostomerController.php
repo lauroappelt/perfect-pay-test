@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\Costomer;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Costomer\CreateCostomerRequest;
 use App\Http\Requests\Api\Costomer\UpdateCostomerRequest;
+use App\Models\Costomer\Costomer;
+use App\Services\Costomer\CostomerService;
 use App\Services\Costomer\CreateCostomerService;
 use App\Services\Costomer\UpdateCostomerService;
 use Exception;
@@ -12,14 +14,13 @@ use Exception;
 class CostomerController extends Controller
 {
     public function __construct(
-        private CreateCostomerService $createCostomerService,
-        private UpdateCostomerService $updateCostomerService
+        private CostomerService $service,
     ) {}
 
     public function createCostomer(CreateCostomerRequest $request)
     {
         try {
-            $costomer = $this->createCostomerService->handle(
+            $costomer = $this->service->handle(
                 $request->validated()
             );
 
@@ -40,7 +41,7 @@ class CostomerController extends Controller
         try {
             $params = $request->validated();
 
-            $costomer = $this->updateCostomerService->handle($params, $id);
+            $costomer = $this->service->handle($params, $id);
             return response()->json(['success' => true, 'data' => $costomer->toArray()], 200);
         } catch (Exception $exception) {
             return response()->json([

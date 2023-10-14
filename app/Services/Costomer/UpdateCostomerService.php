@@ -6,7 +6,7 @@ use App\Models\Costomer\Costomer;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class UpdateCostomerService
+class UpdateCostomerService implements CostomerService
 {
     public function handle(array $params, string $id): Costomer
     {
