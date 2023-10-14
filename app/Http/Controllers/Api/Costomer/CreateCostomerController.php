@@ -15,7 +15,7 @@ class CreateCostomerController extends Controller
         private CreateCostomerService $createCostomerService
     ) {}
 
-    public function __invoke(CreateCostomerRequest $request)
+    public function createCostomer(CreateCostomerRequest $request)
     {
         try {
             $costomer = $this->createCostomerService->handle(

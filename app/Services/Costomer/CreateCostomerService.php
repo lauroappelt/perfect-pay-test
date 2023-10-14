@@ -14,7 +14,7 @@ class CreateCostomerService
         try {
             return Costomer::create($params);
         } catch (UniqueConstraintViolationException $exception) {
-           throw new Exception($exception->getMessage(), 400);
+           throw new Exception("One or more fields already exists", 422);
         }
     }
 }

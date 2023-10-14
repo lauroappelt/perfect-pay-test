@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-
 class Costomer extends Model
 {
     use HasFactory;
@@ -18,6 +17,8 @@ class Costomer extends Model
         'email',
         'cpf'
     ];
+
+    protected $keyType = 'string';
 
     /**
     * Create a new factory instance for the model.
