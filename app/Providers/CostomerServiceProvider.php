@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Factories\CostomerServiceFactory;
 use App\Http\Controllers\Api\Costomer\CostomerController;
 use App\Services\Costomer\CostomerService;
 use App\Services\Costomer\CreateCostomerService;
+use App\Services\Costomer\GetCostomerService;
 use App\Services\Costomer\UpdateCostomerService;
 use Illuminate\Support\ServiceProvider;
 
@@ -18,14 +20,7 @@ class CostomerServiceProvider extends ServiceProvider
         $this->app->when(CostomerController::class)
             ->needs(CostomerService::class)
             ->give(function(){
-                $currentAction = app('request')->route()->getActionMethod();
-
-                switch ($currentAction) {
-                    case 'createCostomer':
-                        return new CreateCostomerService();
-                    case 'updateCostomer':
-                        return new UpdateCostomerService();
-                }
+                return CostomerServiceFactory::create();
             });
     }
 

@@ -22,6 +22,7 @@ Route::post('login', LoginController::class)->name('api.login');
 Route::middleware('auth:sanctum')->group(function(){
     Route::prefix('costomer')->group(function () {
         Route::post('', [CostomerController::class, 'createCostomer'])->name('api.costomer');
+        Route::get('{id}', [CostomerController::class, 'getCostomer'])->name('api.costomer.get');
         Route::put('{id}', [CostomerController::class, 'updateCostomer'])->name('api.costomer.update');
     });
 });
