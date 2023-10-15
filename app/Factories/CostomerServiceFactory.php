@@ -4,6 +4,8 @@ namespace App\Factories;
 use App\Services\Costomer\CreateCostomerService;
 use App\Services\Costomer\UpdateCostomerService;
 use App\Services\Costomer\GetCostomerService;
+use App\Services\Costomer\ListCostomerService;
+use Symfony\Component\Console\Command\ListCommand;
 
 class CostomerServiceFactory
 {
@@ -17,6 +19,8 @@ class CostomerServiceFactory
                 return new UpdateCostomerService;
             case 'getCostomer':
                 return new GetCostomerService;
+            case 'listCostomer':
+                return new ListCostomerService;
         }
     }
 }

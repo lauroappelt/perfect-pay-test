@@ -22,5 +22,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'lauro.appelt@mycompany.com',
             'password' => Hash::make('senhaforte'),
         ]);
+
+        $this->call([
+            CostomerSeed::class,
+        ]);
     }
 }
