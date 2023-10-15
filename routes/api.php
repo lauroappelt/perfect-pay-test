@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Costomer\CostomerController;
+use App\Http\Controllers\Api\Product\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,5 +26,9 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::get('{id}', [CostomerController::class, 'getCostomer'])->name('api.costomer.get');
         Route::get('', [CostomerController::class, 'listCostomer'])->name('api.costomer.list');
         Route::put('{id}', [CostomerController::class, 'updateCostomer'])->name('api.costomer.update');
+    });
+
+    Route::prefix('product')->group(function () {
+        Route::post('', [ProductController::class, 'createProduct'])->name('api.product.create');
     });
 });
