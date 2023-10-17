@@ -30,6 +30,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::prefix('product')->group(function () {
         Route::post('', [ProductController::class, 'createProduct'])->name('api.product.create');
+        Route::get('{id}', [ProductController::class, 'getProduct'])->name('api.product.get');
         Route::put('{id}', [ProductController::class, 'updateProduct'])->name('api.product.update');
     });
 });
