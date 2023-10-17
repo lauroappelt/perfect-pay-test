@@ -14,11 +14,11 @@ class ProductServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->when(ProductController::class)
-            ->needs(ProductService::class)
-            ->give(function (){
-                return ProductServiceFactory::create();
-            });
+        // $this->app->when(ProductController::class)
+        //     ->needs(ProductService::class)
+        //     ->give(function (){
+        //         return ProductServiceFactory::create();
+        //     });
     }
 
     /**

@@ -5,21 +5,19 @@ namespace App\Http\Controllers\Api\Product;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Product\CreateProductRequest;
 use App\Http\Requests\Api\Product\UpdateProductRequest;
+use App\Services\Product\CreateProductService;
 use App\Services\Product\ProductService;
+use App\Services\Product\UpdateProductService;
 use Exception;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function __construct(
-        private ProductService $service,
-    ) {}
-
-    public function createProduct(CreateProductRequest $request)
+    public function createProduct(CreateProductRequest $request, CreateProductService $service)
     {
         try {
 
-            $product = $this->service->handle(
+            $product = $service->handle(
                 $request->validated()
             );
 
@@ -35,11 +33,11 @@ class ProductController extends Controller
         }
     }
 
-    public function updateProduct(UpdateProductRequest $request, $id)
+    public function updateProduct(UpdateProductRequest $request, UpdateProductService $service, $id)
     {
         try {
 
-            $product = $this->service->handle(
+            $product = $service->handle(
                 $request->validated(),
                 $id
             );

@@ -7,19 +7,19 @@ use App\Http\Requests\Api\Costomer\CreateCostomerRequest;
 use App\Http\Requests\Api\Costomer\UpdateCostomerRequest;
 use App\Models\Costomer\Costomer;
 use App\Services\Costomer\CostomerService;
+use App\Services\Costomer\CreateCostomerService;
+use App\Services\Costomer\GetCostomerService;
+use App\Services\Costomer\ListCostomerService;
+use App\Services\Costomer\UpdateCostomerService;
 use Exception;
 use Illuminate\Http\Request;
 
 class CostomerController extends Controller
 {
-    public function __construct(
-        private CostomerService $service,
-    ) {}
-
-    public function getCostomer($id)
+    public function getCostomer(GetCostomerService $service, $id)
     {
         try {
-            $costomer = $this->service->handle($id);
+            $costomer = $service->handle($id);
 
             return response()->json([
                 'success' => true,
@@ -33,12 +33,12 @@ class CostomerController extends Controller
         }
     }
 
-    public function listCostomer(Request $request)
+    public function listCostomer(Request $request, ListCostomerService $service)
     {
         try {
 
             $queryParams = $request->all();
-            $costomers = $this->service->handle($queryParams);
+            $costomers = $service->handle($queryParams);
 
             return response()->json($costomers, 200);
 
@@ -50,10 +50,10 @@ class CostomerController extends Controller
         }
     }
 
-    public function createCostomer(CreateCostomerRequest $request)
+    public function createCostomer(CreateCostomerRequest $request, CreateCostomerService $service)
     {
         try {
-            $costomer = $this->service->handle(
+            $costomer = $service->handle(
                 $request->validated()
             );
 
@@ -69,12 +69,13 @@ class CostomerController extends Controller
         }
     }
 
-    public function updateCostomer(UpdateCostomerRequest $request, $id)
+    public function updateCostomer(UpdateCostomerRequest $request, UpdateCostomerService $service, $id)
     {
         try {
             $params = $request->validated();
 
-            $costomer = $this->service->handle($params, $id);
+            $costomer = $service->handle($params, $id);
+            
             return response()->json(['success' => true, 'data' => $costomer->toArray()], 200);
         } catch (Exception $exception) {
             return response()->json([

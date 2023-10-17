@@ -17,11 +17,11 @@ class CostomerServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->when(CostomerController::class)
-            ->needs(CostomerService::class)
-            ->give(function(){
-                return CostomerServiceFactory::create();
-            });
+        // $this->app->when(CostomerController::class)
+        //     ->needs(CostomerService::class)
+        //     ->give(function(){
+        //         return CostomerServiceFactory::create();
+        //     });
     }
 
     /**
