@@ -46,7 +46,7 @@ class CostomerController extends Controller
             return response()->json([
                 'success' => false,
                 'error' => $exception->getMessage(),
-            ], $exception->getCode());
+            ], 500);
         }
     }
 

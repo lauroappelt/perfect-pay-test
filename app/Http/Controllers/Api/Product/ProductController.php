@@ -7,6 +7,7 @@ use App\Http\Requests\Api\Product\CreateProductRequest;
 use App\Http\Requests\Api\Product\UpdateProductRequest;
 use App\Services\Product\CreateProductService;
 use App\Services\Product\GetProductService;
+use App\Services\Product\ListProductService;
 use App\Services\Product\ProductService;
 use App\Services\Product\UpdateProductService;
 use Exception;
@@ -69,6 +70,26 @@ class ProductController extends Controller
                 'success' => false,
                 'error' => $exception->getMessage(),
             ], $exception->getCode());
+        }
+    }
+
+    public function listProduct(Request $request, ListProductService $service)
+    {
+        try {
+
+            $queryParams = $request->all();
+            $products = $service->handle($queryParams);
+
+            return response()->json([
+                'success' => true,
+                'data' => $products
+            ]);
+
+        } catch (Exception $exception) {
+            return response()->json([
+                'success' => false,
+                'error' => $exception->getMessage(),
+            ], 500);
         }
     }
 }
