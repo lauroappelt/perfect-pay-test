@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->timestamp('date_sale');
-            $table->integer('product_quantity');
+            $table->timestamp('date');
+            $table->integer('ammount');
             $table->integer('discount');
             $table->string('status');
-            $table->uuid('customer_id');
+            $table->uuid('costomer_id');
             $table->uuid('product_id');
             $table->timestamps();
 
-            $table->foreign('customer_id')->references('id')->on('costomers');
+            $table->foreign('costomer_id')->references('id')->on('costomers');
             $table->foreign('product_id')->references('id')->on('products');
         });
     }
