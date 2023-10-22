@@ -2,11 +2,12 @@
 
 namespace App\Models\Sale;
 
-use App\States\SaleState;
+use App\States\Sale\SaleState;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Enums\Sale\SaleEnum;
-use Illuminate\Database\Eloquent\Casts\Attribute;
+use Database\Factories\SaleFactory;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class Sale extends Model
 {
@@ -28,7 +29,16 @@ class Sale extends Model
         'date' => 'date:Y-m-d',
     ];
 
-    public function getState() {
+    /**
+    * Create a new factory instance for the model.
+    */
+    protected static function newFactory(): Factory
+    {
+        return SaleFactory::new();
+    }
+
+    public function getState(): SaleState
+    {
         return SaleEnum::from($this->status)->createSaleState($this);
     }
 }

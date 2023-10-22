@@ -2,6 +2,7 @@
 
 namespace App\States\Sale;
 
+use App\Exceptions\Sale\InvalidTransitionException;
 use App\Models\Sale\Sale;
 use Exception;
 
@@ -11,18 +12,18 @@ abstract class SaleState
         protected Sale $sale
     ) {}
 
-    public function changeToPaid()
+    public function pay()
     {
-        throw new Exception("Invalid state transiction");
+        throw new InvalidTransitionException("Current status does not allows transtition to paid state");
     }
 
-    public function changeToCompleted()
+    public function finalize()
     {
-        throw new Exception("Invalid state transiction");
+        throw new InvalidTransitionException("Current status does not allows transtition to completed state");
     }
 
-    public function changeToCanceled()
+    public function cancel()
     {
-        throw new Exception("Invalid state transiction");
+        throw new InvalidTransitionException("Current status does not allows transtition to canceled state");
     }
 }

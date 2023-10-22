@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Costomer\CostomerController;
 use App\Http\Controllers\Api\Product\ProductController;
 use App\Http\Controllers\Sale\CreateSaleController;
+use App\Http\Controllers\Sale\TransitionStatusController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -38,5 +39,6 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::prefix('sale')->group(function() {
         Route::post('', CreateSaleController::class)->name('api.sale.create');
+        Route::patch('{id}/{new_status}', TransitionStatusController::class)->name('api.sale.transtition');
     });
 });
