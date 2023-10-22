@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Costomer\CostomerController;
 use App\Http\Controllers\Api\Product\ProductController;
+use App\Http\Controllers\Sale\CreateSaleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,5 +34,9 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::get('', [ProductController::class, 'listProduct'])->name('api.product.list');
         Route::get('{id}', [ProductController::class, 'getProduct'])->name('api.product.get');
         Route::put('{id}', [ProductController::class, 'updateProduct'])->name('api.product.update');
+    });
+
+    Route::prefix('sale')->group(function() {
+        Route::post('', CreateSaleController::class)->name('api.sale.create');
     });
 });
