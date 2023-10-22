@@ -23,7 +23,7 @@ class CreateSaleController extends Controller
 
             return response()->json([
                 'success' => true,
-                'data' => new CreateSaleResource($sale),
+                'data' => $sale->toArray(),
             ], 201);
     }
 }

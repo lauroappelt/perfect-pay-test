@@ -25,13 +25,10 @@ class Sale extends Model
     ];
 
     public $casts = [
-        'date' => 'date',
+        'date' => 'date:Y-m-d',
     ];
 
-    public function status(): Attribute
-    {
-        return new Attribute(
-            get: fn (string $value) => SaleEnum::from($value)->createSaleState($this),
-        );
-    }   
+    public function getState() {
+        return SaleEnum::from($this->status)->createSaleState($this);
+    }
 }
