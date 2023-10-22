@@ -2,6 +2,7 @@
 
 namespace App\Services\Costomer;
 
+use App\Exceptions\Costomer\DuplicateCostomerException;
 use App\Models\Costomer\Costomer;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -17,9 +18,7 @@ class UpdateCostomerService implements CostomerService
 
             return $costomer;
         } catch (UniqueConstraintViolationException $exception) {
-            throw new \Exception("One or more fields already exists", 422);
-        } catch (ModelNotFoundException $notFoundException) {
-            throw new \Exception("Resource not found", 404);
+            throw new DuplicateCostomerException("One or more fields already exists");
         }
     }
 }

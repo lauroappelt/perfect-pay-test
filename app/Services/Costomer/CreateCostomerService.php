@@ -1,6 +1,8 @@
 <?php
+
 namespace App\Services\Costomer;
 
+use App\Exceptions\Costomer\DuplicateCostomerException;
 use App\Models\Costomer\Costomer;
 use Exception;
 use Illuminate\Database\UniqueConstraintViolationException;
@@ -13,7 +15,7 @@ class CreateCostomerService implements CostomerService
         try {
             return Costomer::create($params);
         } catch (UniqueConstraintViolationException $exception) {
-           throw new Exception("One or more fields already exists", 422);
+            throw new DuplicateCostomerException("One or more fields already exists");
         }
     }
 }

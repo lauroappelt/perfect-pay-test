@@ -10,10 +10,6 @@ class GetCostomerService implements CostomerService
 {
     public function handle(string $id): Costomer
     {
-        try {
-            return Costomer::findOrFail($id);
-        } catch (ModelNotFoundException $notFoundException) {
-            throw new Exception("Resource not found", 404);
-        }
+        return Costomer::findOrFail($id);
     }
 }

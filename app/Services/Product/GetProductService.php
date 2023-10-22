@@ -10,10 +10,6 @@ class GetProductService implements ProductService
 {
     public function handle(string $id): Product
     {
-        try {
-            return Product::findOrFail($id);
-        } catch (ModelNotFoundException $notFoundException) {
-            throw new Exception("Resource not found", 404);
-        }
+        return Product::findOrFail($id);
     }
 }

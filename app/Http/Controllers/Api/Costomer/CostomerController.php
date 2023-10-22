@@ -18,70 +18,41 @@ class CostomerController extends Controller
 {
     public function getCostomer(GetCostomerService $service, $id)
     {
-        try {
-            $costomer = $service->handle($id);
+        $costomer = $service->handle($id);
 
-            return response()->json([
-                'success' => true,
-                'data' => $costomer->toArray(),
-            ], 200);
-        } catch (Exception $exception) {
-            return response()->json([
-                'success' => false,
-                'error' => $exception->getMessage(),
-            ], $exception->getCode());
-        }
+        return response()->json([
+            'success' => true,
+            'data' => $costomer->toArray(),
+        ], 200);
     }
 
     public function listCostomer(Request $request, ListCostomerService $service)
     {
-        try {
 
-            $queryParams = $request->all();
-            $costomers = $service->handle($queryParams);
+        $queryParams = $request->all();
+        $costomers = $service->handle($queryParams);
 
-            return response()->json($costomers, 200);
-
-        } catch (Exception $exception) {
-            return response()->json([
-                'success' => false,
-                'error' => $exception->getMessage(),
-            ], 500);
-        }
+        return response()->json($costomers, 200);
     }
 
     public function createCostomer(CreateCostomerRequest $request, CreateCostomerService $service)
     {
-        try {
-            $costomer = $service->handle(
-                $request->validated()
-            );
+        $costomer = $service->handle(
+            $request->validated()
+        );
 
-            return response()->json([
-                'success' => true,
-                'data' => $costomer->toArray(),
-            ], 201, ['Location' => '/api/costomer/' . $costomer->id]);
-
-        } catch (Exception $exception) {
-            return response()->json([
-                'success' => false,
-                'error' => $exception->getMessage()], $exception->getCode());
-        }
+        return response()->json([
+            'success' => true,
+            'data' => $costomer->toArray(),
+        ], 201, ['Location' => '/api/costomer/' . $costomer->id]);
     }
 
     public function updateCostomer(UpdateCostomerRequest $request, UpdateCostomerService $service, $id)
     {
-        try {
-            $params = $request->validated();
+        $params = $request->validated();
 
-            $costomer = $service->handle($params, $id);
-            
-            return response()->json(['success' => true, 'data' => $costomer->toArray()], 200);
-        } catch (Exception $exception) {
-            return response()->json([
-                'success' => false,
-                'error' => $exception->getMessage(),
-            ], $exception->getCode());
-        }
+        $costomer = $service->handle($params, $id);
+        
+        return response()->json(['success' => true, 'data' => $costomer->toArray()], 200);
     }
 }
