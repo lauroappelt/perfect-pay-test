@@ -31,7 +31,7 @@ class CreateSaleRequest extends FormRequest
                 'exists:costomers,id'
             ],
             'ammount' => 'required|integer',
-            'discount'
+            'discount' => 'sometimes|between:0,100',
         ];
     }
 }

@@ -24,6 +24,10 @@ class Sale extends Model
         'status'
     ];
 
+    public $casts = [
+        'date' => 'date',
+    ];
+
     public function status(): Attribute
     {
         return new Attribute(
